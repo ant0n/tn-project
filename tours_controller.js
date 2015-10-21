@@ -1,11 +1,10 @@
-var app = angular.module("thTour", []);
-
-app.controller("ToursController", function($scope){
+angular.module("tnTour").controller("ToursController", function($scope){
 
   $scope.showForm = false;
   $scope.editForm = false;
 
-  $scope.tours = [];
+  $scope.tours     = allTours;
+  $scope.countries = allCountries;
 
   var defaultTour = {
     title:    "",

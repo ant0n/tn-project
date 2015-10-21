@@ -1,0 +1,23 @@
+<form class="form-inline select-country" ng-model="country">
+  <div class="form-group">
+    <div class="input-group">
+      <select class="form-control" ng-model="country">
+        <option ng-repeat="country in countries">{{ country.name }}</option>
+      </select>
+    </div>
+  </div>
+  <button ng-click="selectCountry(country)" class="btn btn-primary"> Select country</button>
+</form>
+
+<section class="tours row">
+  <div class="row" ng-repeat="tour in tours" ng-hide="showTour[$index]">
+    <article class="col-md-6">
+      <header class="clearfix"> 
+        <h3> <a ng-href="tour/{{tour.linkName}}"> {{tour.title}} </a></h3>
+        <div class="tour-country">{{ tour.country }}</div>
+        <div class="tour-price">{{tour.price}}</div>
+      </header>
+      <p class="descripttion">{{tour.description | limitTo:descriptionLimit}}</p>
+    </article>
+  </div>
+</section>
