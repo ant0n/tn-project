@@ -1,12 +1,9 @@
-angular.module("tnTour").controller("MainController", function($scope){
-  $scope.descriptionLimit = 20;
-  $scope.countries        = allCountries
-  $scope.tours            = allTours;
-  $scope.showTour         = [];
+angular.module("tnTour").controller("MainController", function($scope, $controller, $resource, $q){
+  angular.extend(
+    this,
+    $controller('DataController', {$scope: $scope, $resource: $resource})
+  )
 
-  $scope.selectCountry = function(country){
-    angular.forEach($scope.tours, function(tour, index){
-      $scope.showTour[index] = tour.country != country;
-    });
-  }
+  $scope.descriptionLimit = 20;
+  $scope.showTour         = [];
 });

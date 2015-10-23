@@ -1,5 +1,5 @@
-angular.module('tnTour', ['ngRoute'])
-.config(function($routeProvider, $locationProvider) {
+angular.module('tnTour', ['ngRoute', 'ngResource'])
+.config(function($routeProvider, $locationProvider, $httpProvider) {
   $routeProvider
   .when('/',{
     templateUrl: "main.html",
@@ -16,7 +16,12 @@ angular.module('tnTour', ['ngRoute'])
     controller: 'CountriesController',
     publicAccess: false
   })
-  .when('/tour/:linkName', {
+  .when('/places',{
+    templateUrl: "places_list.html",
+    controller: 'PlacesController',
+    publicAccess: false
+  })
+  .when('/tour/:id', {
     templateUrl: "tour.html",
     controller: "TourController",
     publicAccess: true
@@ -25,6 +30,10 @@ angular.module('tnTour', ['ngRoute'])
     redirectTo: '/'
   });
 
+  $httpProvider.defaults.headers.common = {
+    "X-Parse-Application-Id": "xAhB4qGdZ2QA9g7J0o45786vogcAQw8Rr3IkVWxK",
+    "X-Parse-REST-API-Key": "UFmqpwXBbtNTR9XdJmA9EMhG7rmyFupSmHarSwyN"
+  }
   $locationProvider.html5Mode(true);
 })
 .run(function($rootScope, $route, $location){
@@ -38,26 +47,3 @@ angular.module('tnTour', ['ngRoute'])
     }
   });
 });
-
-var allTours = [
-  {
-    linkName:     'hell',
-    title:        'В ад, на неделю и обратно',
-    country:      'Hell',
-    description:  'ОГОНЬ, ОГОНЬ, ЖАРА, ОГОНЬ!!!!!!!!!!!',
-    price:        'один из смертных грехов'
-  },
-  {
-    linkName:     'russia_piter_week',
-    title:        'В питер на недельку',
-    country:      'Russia',
-    description:  'вперед за депресухой!',
-    price:        '1000'     
-  }
-]
-
-var allCountries = [
-  { name: 'Russia' },
-  { name: 'Hell' },
-  { name: 'Germany' }
-]

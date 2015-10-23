@@ -1,0 +1,31 @@
+<h2>Места</h2>
+
+<form class="form-inline create-place" ng-model="newPlace">
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control" id="placeName" placeholder="кулички" ng-model="newPlace.name" >
+    </div>
+  </div>
+  <button ng-click="addPlace()" class="btn btn-primary">Add place</button>
+</form>
+
+
+<div class="row places-list" ng-repeat="place in places">
+	<form class="form-inline" ng-show="showForm[$index]" ng-model="place">
+	  <div class="form-group">
+	    <div class="input-group">
+	      <input type="text" class="form-control" id="placeName" ng-model="place.name" value="{{place.name}}" />
+	    </div>
+	  </div>
+	  <button type="submit" ng-click="savePlace(place, $index)" class="btn btn-primary">Save</button>
+	  <button type="submit" ng-click="showForm[$index]=false" class="btn btn-default">Cancel</button>
+	</form>
+
+	<div class="place-data" ng-hide="showForm[$index]">
+		<div class="col-md-4"> {{ place.name }} </div>
+		<div class="col-md-2"> 
+			<a href="#" ng-click="showForm[$index]=true">Edit</a>
+			<a href="#" ng-click="deletePlace(place, $index)">Delete</a>
+		</div>
+	</div>
+</div>

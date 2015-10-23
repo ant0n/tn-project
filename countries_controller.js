@@ -1,21 +1,29 @@
-angular.module("tnTour").controller("CountriesController", function($scope){
-  $scope.countries = allCountries;
+angular.module("tnTour").controller("CountriesController", function($scope, $controller, $resource){
+  angular.extend(
+    this,
+    $controller('DataController', {$scope: $scope, $resource: $resource})
+  )
+
   $scope.showForm  = [];
 
   $scope.addCountry = function(){
-    $scope.countries.push(angular.copy($scope.newCountry))
-  }
-
-  $scope.editCountry = function(country){
-    $scope.newCountry = angular.copy(country)
+    new Country($scope.newCountry).$save().then(function(country){
+      var countryFromServer = angular.extend(country, $scope.newCountry);
+      $scope.countries.push(countryFromServer);
+      $scope.newCountry = {};
+    });
   }
 
   $scope.saveCountry = function(country, $index){
-    $scope.countries[$index] = country;
-    $scope.showForm[$index]  = false;
+    country.$update().then(function(){
+      $scope.countries[$index] = country;  
+      $scope.showForm[$index]  = false;
+    })
   }
 
   $scope.deleteCountry = function(country, $index){
-    $scope.countries.splice($index, 1);
+    country.$delete().then(function(){
+      $scope.countries.splice($index, 1);
+    })
   }
 });

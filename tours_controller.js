@@ -1,10 +1,12 @@
-angular.module("tnTour").controller("ToursController", function($scope){
+angular.module("tnTour").controller("ToursController", function($scope, $controller, $resource){
+  angular.extend(
+    this,
+    $controller('DataController', {$scope: $scope, $resource: $resource})
+  )
 
   $scope.showForm = false;
   $scope.editForm = false;
 
-  $scope.tours     = allTours;
-  $scope.countries = allCountries;
 
   var defaultTour = {
     title:    "",
@@ -13,31 +15,40 @@ angular.module("tnTour").controller("ToursController", function($scope){
     price:    null
   }
 
-  clearForm = function() {
+  $scope.clearForm = function() {
     $scope.tourForm.$setPristine();
     $scope.newTour  = defaultTour;
     $scope.showForm = false 
   }
 
   $scope.addTour = function(tour){
-    $scope.tours.push(angular.copy($scope.newTour))
-    clearForm();
+    new Tour($scope.newTour).$save().then(function(tour){
+      var tourFromServer = angular.extend(tour, $scope.newTour);
+      $scope.tours.push(tourFromServer);
+      $scope.clearForm();
+    });
   }
 
-  $scope.editTour = function(tour){
+  $scope.editTour = function(tour, $index){
     $scope.newTour   = angular.copy(tour)
-    $scope.editIndex = $scope.tours.indexOf(tour)
+    $scope.editIndex = $index
     $scope.showForm  = true
     $scope.editForm  = true
   }
 
-  $scope.saveTour = function(){
-    $scope.tours[$scope.editIndex] = angular.copy($scope.newTour);
-    clearForm();
+  $scope.saveTour = function(tour){
+    tour = angular.copy($scope.newTour);
+
+    tour.$update().then(function(){
+      angular.extend($scope.tours[$scope.editIndex], tour);
+      $scope.clearForm();
+    })
+
   }
 
-  $scope.deleteTour = function(tour){
-    var index = $scope.tours.indexOf(tour)
-    $scope.tours.splice(index, 1);
+  $scope.deleteTour = function(tour, $index){
+    tour.$delete().then(function(){
+      $scope.tours.splice($index, 1);
+    })
   }
 });

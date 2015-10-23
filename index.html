@@ -37,11 +37,14 @@
       .actions {
         float: right;
       }
-      form.create-country{
+      form.create-country, form.create-place{
         margin-bottom: 10px;
       }
-      .countries-list {
+      .countries-list, .places-list {
         margin-bottom: 10px;
+      }
+      .clear-filter {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -60,10 +63,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.min.js"></script>
     <script src="app.js" type="text/javascript"></script>
+    <script src="data_controller.js" type="text/javascript"></script>
     <script src="main_controller.js" type="text/javascript"></script>
     <script src="tours_controller.js" type="text/javascript"></script>
     <script src="tour_controller.js" type="text/javascript"></script>
     <script src="countries_controller.js" type="text/javascript"></script>
+    <script src="places_controller.js" type="text/javascript"></script>
   </body>
 </html>
