@@ -14,7 +14,7 @@
 	<form class="form-inline" ng-show="showForm[$index]" ng-model="place">
 	  <div class="form-group">
 	    <div class="input-group">
-	      <input type="text" class="form-control" id="placeName" ng-model="place.name" value="{{place.name}}" />
+	      <input type="text" class="form-control" id="placeName" ng-model="place" value="{{place.name}}" />
 	    </div>
 	  </div>
 	  <button type="submit" ng-click="savePlace(place, $index)" class="btn btn-primary">Save</button>

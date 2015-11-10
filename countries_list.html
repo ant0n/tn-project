@@ -14,7 +14,7 @@
 	<form class="form-inline" ng-show="showForm[$index]" ng-model="country">
 	  <div class="form-group">
 	    <div class="input-group">
-	      <input type="text" class="form-control" id="countryName" ng-model="country.name" value="{{country.name}}" />
+	      <input type="text" class="form-control" id="countryName" ng-model="country" value="{{country.name}}" />
 	    </div>
 	  </div>
 	  <button type="submit" ng-click="saveCountry(country, $index)" class="btn btn-primary">Save</button>
