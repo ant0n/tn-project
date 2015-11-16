@@ -1,4 +1,4 @@
-angular.module("tnTour").controller("DataController", function($resource, $scope, $q){
+angular.module("tnTour").controller("DataController", function($resource, $scope){
   parseResults = function(data, headersGetter){
     var data = angular.fromJson(data);
     return data.results

@@ -4,10 +4,9 @@ angular.module("tnTour").controller("MainController", function($scope, $controll
     $controller('DataController', {$scope: $scope, $resource: $resource})
   )
 
-  $scope.Filter = {}
-
-  $scope.descriptionLimit = 20;
+  $scope.Filter           = {}
   $scope.showTour         = [];
+  $scope.descriptionLimit = 20;
 
   $scope.checkPlace =  function(place, index){
   	if(angular.isDefined($scope.Filter.country)){
