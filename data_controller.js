@@ -1,6 +1,6 @@
 angular.module("tnTour").controller("DataController", function($resource, $scope, $q){
   parseResults = function(data, headersGetter){
-    data = angular.fromJson(data);
+    var data = angular.fromJson(data);
     return data.results
   }
 

@@ -5,6 +5,7 @@
   <div class="form-group">
     <div class="input-group">
       <select class="form-control" ng-model="Filter.country">
+        <option value="">All countries</option>
         <option ng-repeat="country in countries" value="{{ country.name }}">{{ country.name }}</option>
       </select>
     </div>
@@ -14,8 +15,9 @@
   </div>
   <div class="form-group">
     <div class="input-group">
-      <select class="form-control" ng-model="Filter.place">
-        <option ng-repeat="place in places" value="{{ place.name }}">{{ place.name }}</option>
+      <select class="form-control" ng-model="Filter">
+        <option value="">All places</option>
+        <option ng-repeat="place in places | filter: checkPlace" value="{{ place.name }}">{{ place.name }}</option>
       </select>
     </div>
   </div>
